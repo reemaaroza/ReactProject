@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello react!</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Create four equal columns that floats next to each other */
+      .column {
+        float: left;
+        width: 25%;
+        padding: 10px;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="container">
+      <form id="myForm" name="myForm">
+        <div class="row">
+          <div class="column">
+            <label for="username"> Name :</label>
+          </div>
+
+          <div class="column">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Your name.."
+              onChange="{handleChange}"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <label for="age"> Age :</label>
+          </div>
+
+          <div class="column">
+            <input type="number" name="age" onChange="{handleChange}" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <label for="designation"> Designation :</label>
+          </div>
+          <div class="column">
+            <select
+              name="designation"
+              id="designation"
+              onChange="{handleChange}"
+            >
+              <option value="software">software</option>
+              <option value="teacher">teacher</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column"></div>
+
+          <div class="column">
+            <input
+              type="checkbox"
+              id="active"
+              name="active"
+              value="active"
+              onChange="{handleChange}"
+            />
+            <label for="active"> Is active</label><br />
+          </div>
+        </div>
+        <div className="step">
+          <div className="buttons">
+            <div class="row">
+              <div class="column"></div>
+
+              <div class="column">
+                <button
+                  onclick="myFunctionSubmit()"
+                  style="background-color: purple; color: white"
+                >
+                  Submit
+                </button>
+                <button
+                  onclick="myFunctionClear()"
+                  style="background-color: purple; color: white"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script>
+      function App() {
+        const [inputs, setInputs] = useState({});
+        return React.createElement("header", null, `Hello react!!!`);
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(React.createElement(App));
+      }
+
+      const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs((values) => ({ ...values, [name]: value }));
+      };
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(inputs);
+      };
+
+      function myFunctionSubmit(event) {
+        let x = document.forms["myForm"]["username"].value;
+        if (x == "") {
+          alert("enter the name");
+          return false;
+        }
+
+        let username = document.forms["myForm"]["username"].value;
+        let age = document.forms["myForm"]["age"].value;
+        let designation = document.forms["myForm"]["designation"].value;
+        let activecheckBox = document.forms["myForm"]["active"];
+        var chkActiveForItems = false;
+
+        if (activecheckBox.checked == true) {
+          chkActiveForItems = true;
+        } else {
+          chkActiveForItems = false;
+        }
+
+        alert(
+          `values username : ${username} ,age : ${age},designation : ${designation},active : ${chkActiveForItems} `
+        );
+      }
+
+      function myFunctionClear(event) {
+        alert("The form was Cleared");
+        document.getElementById("myForm").reset();
+      }
+    </script>
+  </body>
+</html>
